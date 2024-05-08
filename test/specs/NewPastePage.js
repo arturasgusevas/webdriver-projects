@@ -1,22 +1,28 @@
 import {$, browser} from '@wdio/globals';
 
 class NewPastePage {
-  static async enterDetails({text}) {
+  static async enterDetails({code, syntax}) {
     const newButton = await $('#newbutton');
     await newButton.click();
 
     const textBox = await $('textarea#message');
-    await textBox.setValue(text);
+    await textBox.setValue(code);
 
     await browser.pause(1000);
 
-    const dropdown = await $('a#expiration');
-    await dropdown.click();
-    await browser.pause(1000);
+    const sintaxBtn = await $('a#formatter');
+    await sintaxBtn.click();
 
-    const expirationOption = await $(`a[data-expiration="10min"]`);
+    const sintaxOption = await $('a[data-format="syntaxhighlighting"]');
+    await sintaxOption.click();
+    browser.pause(1000);
+
+    const expirationBtn = await $('a#expiration');
+    await expirationBtn.click();
+
+    const expirationOption = await $('a[data-expiration="10min"]');
     await expirationOption.click();
-    await browser.pause(1000);
+    browser.pause(1000);
   }
 
   static async submitPaste() {
@@ -25,6 +31,11 @@ class NewPastePage {
     await submitButton.waitForEnabled({timeout: 5000});
     await submitButton.click();
     await browser.pause(10000);
+  }
+
+  static async verifyPaste(code) {
+    const content = await $('textarea#message').getValue();
+    expect(content).toEqual(code);
   }
 }
 
