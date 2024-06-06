@@ -19,7 +19,10 @@
     "@wdio/mocha-framework": "^8.36.1",
     "@wdio/spec-reporter": "^8.36.1",
     "@wdio/visual-service": "^4.1.1",
-    "chromedriver": "^98.0.1",
+    "chromedriver": "^124.0.2",
     "wdio-chromedriver-service": "^8.1.1"
+  },
+  "dependencies": {
+    "chai": "^5.1.1"
   }
 }
